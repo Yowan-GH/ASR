@@ -1,0 +1,295 @@
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSSR - Yowan-GH</title>
+
+
+  <!-- Thème Prism.js (coloration syntaxique) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+  <!-- Theme: Simple Dark -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <style>
+    /* ========== VARIABLES GÉNÉRALES DU THEME ========== */
+    :root {
+      /* Couleur principale utilisée pour le vert */
+      --theme-color: #baff39;
+  
+      /* ================================ SIDEBAR ==================================== */
+
+      /* ==== Theme ==== */
+      --sidebar-background: #181818;        /* background sidebar */
+      --sidebar-color: #ffffff;
+      --sidebar-border-color: #baff39; /* Border Color */
+      --sidebar-font-family: 'Segoe UI', sans-serif;
+      --sidebar-nav-link-border-style: solid; /* Barre à coté du titre */
+      --sidebar-width: 25rem;
+
+      /* Liens de la sidebar */
+      --sidebar-nav-link-active-color: #baff39;
+      --sidebar-nav-link-color--hover: #00cc66;
+      
+      /* ================================ COVER ==================================== */
+      /* ==== Boutons cover ==== */
+      --cover-button-primary-background: var(--theme-color) !important;
+      --cover-button-primary-color: #000 !important;
+      --cover-button-primary-border: 2px solid #000 !important;
+      
+      /* ==== Boutons cover over ==== */
+      --cover-button-primary-background--hover: #303030 !important;
+      --cover-button-primary-color--hover: var(--theme-color) !important;
+      --cover-button-primary-border--hover: 2px solid #000 !important;
+
+      /* ================================ MD & Color ==================================== */
+       /* ==== Markdown principal ==== */
+       --base-background-color: #181818;
+      --base-color: #ffffff;
+      --base-font-family: 'Segoe UI', sans-serif;
+  
+      /* ==== Code (inline et blocs) ==== */
+      --code-inline-background: #434444;
+      --code-block-background: #252525;
+    }
+
+    /*  Fond bruité en arrière-plan */
+    body {
+    background-color: #181818; /* Couleur de base sombre */
+    background-image:
+    url('https://yowan-gh.github.io/TSSR/assets/noise-bg.png');     /* Chemin vers l’image bruitée */
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    }
+  
+    /* ========== STYLE DE LA SIDEBAR ========== */
+    .sidebar {
+      background-color: var(--sidebar-background); /* Utilise la variable corrigée */
+      border-right: 2px dashed var(--sidebar-border-color); /* Bordure droite en pointillé vert */
+    }
+  
+    /* ========== LIEN ACTIF DANS LA SIDEBAR ========== */
+    .sidebar .app-sub-sidebar li.active > a {
+      color: var(--theme-color) !important; /* Titre actif en vert */
+    }
+  
+    /* ========== TITRE PRINCIPAL (TSSR) EN HAUT DE LA SIDEBAR ========== */
+    .app-name {
+      color: var(--theme-color) !important;
+      font-weight: bold;
+    }
+    /* ========== `Elargissement de la zone de texte ========== */
+    .markdown-section {
+    max-width: 1200px; /* Avant c'était limité autour de 800px */
+    margin: 0 auto;    /* Garde centré */
+    padding: 2rem;     /* Conserve un peu d'espace intérieur */
+    }
+
+    /* ========== `Couleur bold ========== */
+    .markdown-section strong {
+    color: #baff39; /* Remplace par la couleur de ton choix */
+    }
+    /* ========== `code inline` DANS LE TEXTE MARKDOWN ========== */
+    .markdown-section code {
+      background-color: var(--code-inline-background);
+   }
+  
+    /* ========== BLOCS DE CODE (```bash, ```json, etc.) ========== */
+    .markdown-section pre {
+      background-color: var(--code-block-background);
+      border-radius: 4px;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    /* Supprimer la couleur par défaut forcée */
+    .markdown-section pre code {
+    background: none;
+    color: unset;
+    }
+    /* ========== CURSEUR DE LA BARRE DE RECHERCHE ========== */
+    input[type="search"] {
+      caret-color: var(--theme-color);
+    }
+  
+    /* ========== STYLE DU BOUTON "Accueil" ========== */
+    [href="#/"] {
+      background: #181818;
+      padding: 8px 12px;
+      border-radius: 4px;
+      color: white;
+      text-decoration: none;
+    }
+
+/* Round button + black coverpage Docsify */
+.cover-main a {
+  border-radius: 999px !important;
+  padding: 0.6em 2em;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 0.5em;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* GitHub : transparent button + border + writing */
+.cover-main a[href*="github.com"] {
+  border: 1px solid #000 !important;
+  background: transparent !important;
+  color: #000 !important;
+}
+
+/* GitHub : hover corlor + border + writing */
+.cover-main a[href*="github.com"]:hover {
+  background-color: #3c3d3a !important;
+  color: var(--theme-color) !important; /* Couleur du texte */
+  border: 2px solid #000 !important; /* Bordure */
+}
+/* Logo sidebar */
+.app-name img {
+    height: 100px; /* ajuste ici selon ta préférence */
+    width: auto;  /* garde les proportions */
+  }
+
+  /* -------------------------------------------------------- Collapse --------------------------------------------------------- */
+  .collapsible-content.collapsed {
+  display: none;
+}
+
+.collapsible {
+  position: relative;
+}
+
+.collapse-hint-inline {
+  font-size: 0.55em;
+  font-style: normal;
+  color: #999;
+  display: block;
+  margin-top: -2em;
+  text-align: right;
+  margin-bottom: 0.5em;
+  padding-right: 0.2em;
+}
+  </style>
+
+</head>
+<body>
+  <div id="app">
+  <a href="#/" style="position: fixed; top: 10px; right: 10px; z-index: 100;">🏠 Accueil</a>
+  </div>
+
+     <!-- Configuration Docsify-->
+  <script>
+    window.$docsify = {
+      name: 'Menu',
+      repo: '',
+      loadSidebar: true,
+      logo: '/assets/PNJ.png',
+      coverpage: true,
+      subMaxLevel: 3,
+      auto2top: true,
+      relativePath: true,
+      homepage: 'README.md',
+      sidebarDisplayLevel: 0, // set sidebar display level
+      
+      search: {
+        maxAge: 86400000,
+        placeholder: 'Search...',
+        noData: '404 Not Found',
+        depth: 4,
+        paths: 'auto',
+        hideOtherSidebarContent: false
+      },
+
+         markdown: {
+       renderer: {
+       code: function (code, lang) {
+        const langClass = lang ? `language-${lang}` : '';
+        return `<pre><code class="${langClass}">${Prism.highlight(code, Prism.languages[lang] || Prism.languages.markup, lang)}</code></pre>`;
+      }
+    }
+  }
+    };
+  </script>
+
+<!-----------------------------  Plugins section ----------------------------------->
+
+    <!-- Docsify Core -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+    
+    <!-- docsify-tabs (latest v1.x.x) -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+
+    <!-- Search Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+    
+  
+    <!-- Prism.js Core + Langages -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-powershell.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    
+    
+    <!-- Docsify Collapse sidebar + Fleche -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
+
+    <!-- Docsify Collapse pour le contenu (non pas la sidebar) -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-collapse@1.2.0/dist/docsify-collapse.min.js"></script>
+
+    <!-- Script perso de Collapse des titres H2 -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new MutationObserver(() => {
+          const sections = document.querySelectorAll('.markdown-section h2');
+    
+          sections.forEach(h2 => {
+            if (!h2.classList.contains('collapsible') && h2.nextElementSibling) {
+              h2.classList.add('collapsible');
+              h2.style.cursor = 'pointer';
+    
+              // 🆕 Ajouter un petit texte DANS le titre
+              const hint = document.createElement('span');
+              hint.className = 'collapse-hint-inline';
+              hint.textContent = '🔽';
+              h2.appendChild(document.createElement('br'));
+              h2.appendChild(hint);
+    
+              const container = document.createElement('div');
+              container.classList.add('collapsible-content', 'collapsed');
+    
+              let sibling = h2.nextElementSibling;
+              while (sibling && sibling.tagName !== 'H2') {
+                const next = sibling.nextElementSibling;
+                container.appendChild(sibling);
+                sibling = next;
+              }
+    
+              h2.after(container);
+    
+              h2.addEventListener('click', () => {
+                container.classList.toggle('collapsed');
+                h2.classList.toggle('open');
+              });
+            }
+          });
+        });
+    
+        observer.observe(document.getElementById('main'), {
+          childList: true,
+          subtree: true
+        });
+      });
+    </script>
+    
+
+
+</body>
+</html>
+
